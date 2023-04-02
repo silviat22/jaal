@@ -28,6 +28,37 @@ public class Fibonacci {
     }
 
     /**
+     * Tail recursive Fibonacci
+     * 
+     * @param n A natural number
+     * @return the Fibonacci of n
+     */
+    public static long tailRecursive(int n) {
+        if (n < 1) {
+            return 0;
+        } else if (n == 1) {
+            return 1;
+        }
+
+        return tailRecursive(0, 1, n);
+    }
+
+    /**
+     * Internal details for tail recursive Fibonacci
+     * 
+     * @param previous the previous term in the sequence
+     * @param current  the current term in the sequence
+     * @param n        when is 1, the recursion ends returning current
+     * @return the calculated Fibonacci for the original caller
+     */
+    private static long tailRecursive(long previous, long current, long n) {
+        if (n == 1) {
+            return current;
+        }
+        return tailRecursive(current, previous + current, n - 1);
+    }
+
+    /**
      * Iterative Fibonacci
      * 
      * @param n A natural number
@@ -60,6 +91,7 @@ public class Fibonacci {
     public static void main(String[] args) {
         int n = 40;
         System.out.printf("Fibonacci of %d (recursive) is %d%n", n, recursive(n));
+        System.out.printf("Fibonacci of %d (tail recursive) is %d%n", n, tailRecursive(n));
         System.out.printf("Fibonacci of %d (iterative) is %d%n", n, iterative(n));
     }
 }
