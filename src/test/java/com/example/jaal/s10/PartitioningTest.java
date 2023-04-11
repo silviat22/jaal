@@ -47,6 +47,45 @@ class PartitioningTest {
     }
 
     @Test
+    void pivotLeftOrdered() {
+        int[] values = { 0, 1, 2, 3 };
+        int actual = Partitioning.pivotLeft(values);
+        assertThat(actual).isEqualTo(0);
+        for (int i = 0; i < values.length; i++) {
+            assertThat(values[i]).isEqualTo(i);
+        }
+    }
+
+    @Test
+    void pivotLeftInverted() {
+        int[] values = { 3, 2, 1, 0 };
+        int actual = Partitioning.pivotLeft(values);
+        assertThat(actual).isEqualTo(3);
+    }
+
+    @Test
+    void pivotLeftSingle() {
+        int[] values = { 42 };
+        int actual = Partitioning.pivotLeft(values);
+        assertThat(actual).isEqualTo(0);
+    }
+
+    @Test
+    void pivotLeftCouple() {
+        int[] values = { 12, 42 };
+        int actual = Partitioning.pivotLeft(values);
+        assertThat(actual).isEqualTo(0);
+    }
+
+    @Test
+    void pivotLeftInvertedCouple() {
+        int[] values = { 42, 12 };
+        int actual = Partitioning.pivotLeft(values);
+        assertThat(actual).isEqualTo(1);
+    }
+
+    
+    @Test
     void pivotLeftNull() {
         assertThatNullPointerException().isThrownBy(() -> Partitioning.pivotLeft(null));
     }
@@ -103,11 +142,10 @@ class PartitioningTest {
         assertThatExceptionOfType(ArrayIndexOutOfBoundsException.class)
                 .isThrownBy(() -> Partitioning.pivotGiven(new int[] {}, 0));
     }
-    
 
     @Test
     void pivotGivenBadPosition() {
         assertThatExceptionOfType(ArrayIndexOutOfBoundsException.class)
-                .isThrownBy(() -> Partitioning.pivotGiven(new int[] {42}, 42));
+                .isThrownBy(() -> Partitioning.pivotGiven(new int[] { 42 }, 42));
     }
 }

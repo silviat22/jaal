@@ -21,13 +21,16 @@ public class Partitioning {
      */
     public static int pivotLeft(int[] data) {
         log.trace("Partitioning {}", data);
+        if (data.length == 1) {
+            return 0;
+        }
 
         int pivot = data[0];
         int i = 0;
         int j = data.length;
         while (true) {
             while (data[++i] < pivot) {
-                if (i == data.length) {
+                if (i == data.length - 1) {
                     break;
                 }
             }
@@ -38,7 +41,7 @@ public class Partitioning {
             }
             log.trace("i, j = ({}, {})", i, j);
 
-            if (j < i) {
+            if (i >= j) {
                 break;
             }
             swap(data, i, j);
