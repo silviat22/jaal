@@ -21,7 +21,7 @@ public class Mergesort {
     /**
      * Plain top-down algorithm
      * 
-     * @param data an array (not null!)
+     * @param values an array (not null!)
      */
     public static void plain(int[] values) {
         log.trace("{}", values);
